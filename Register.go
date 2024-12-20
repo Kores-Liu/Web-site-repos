@@ -30,7 +30,7 @@ func registerHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Username or Password does not meet requirements", http.StatusBadRequest)  
         return  
     }  
-  
+  go
     // 连接数据库并插入数据  
     if err := insertUser(username, password); err != nil {  
         http.Error(w, "Failed to register user", http.StatusInternalServerError)  
