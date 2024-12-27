@@ -4,7 +4,7 @@
     <meta charset="UTF-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <title>Personal Blog</title>  
-    <link rel="stylesheet" href="./mystyle.css"> 
+    <link rel="stylesheet" href="../static/mystyle.css"> 
 </head>  
 <body>  
     <header>  
@@ -12,7 +12,7 @@
             <a href="#games">Games</a>  
             <a href="#about">About</a>  
             <a href="#contact">Message Board</a>  
-            <!-- <a href="{{url_for(login)}}">Login</a>   -->
+            <a href="{{ url_for('login') }}">Login</a>  
         </nav>  
     </header>  
     <div class="content">  
