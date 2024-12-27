@@ -16,7 +16,7 @@ cursor = conn.cursor()
 # cursor.execute("insert into Users values('test0000', 'test1111')")
 # conn.commit()
 cursor.execute("select * from dbo.Users")
-row = cursor.fetchone()
+row = cursor.fetchall()
 if row:
     print(row)
 

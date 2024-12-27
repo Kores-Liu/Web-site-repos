@@ -50,22 +50,29 @@ def validate_credentials(username, password):
   
 @app.route('/')  
 def index():  
-    return render_template("Signup.html")  
+    return render_template('test.html')  
   
-@app.route('/register', methods=['POST'])  
-def register():  
-    username = request.form['username']  
-    password = request.form['password']  
-  
+@app.route('/register', methods=['POST', 'Get'])  
+def register():
+    #如果是跳转请求，渲染signup页面
+    if request.method == 'Get':
+        render_template('Signup.html')
+    elif request.method == "Post":   
+        username = request.form.get['username']  
+        password = request.form.get['password']
 
     # 简单的验证  
-    validation, message = validate_credentials(username, password)
-    if not validate_credentials:
-        return message
+        validation, message = validate_credentials(username, password)
+        if not validation:
+            return message
       
-    # 插入到数据库  
-    insert_user(username, password)  
-    return redirect(url_for('index'))  
-  
+        # 插入到数据库  
+        insert_user(username, password)  
+        return redirect(url_for('/'))  
+
+# @app.route('/login')
+# def login():
+#     render_template('login.html')
+ 
 if __name__ == '__main__':  
-    app.run(debug=True,port=5500)  
+    app.run(debug=True)  
