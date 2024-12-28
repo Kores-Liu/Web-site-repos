@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for  
+from flask import Flask, request, render_template, redirect, url_for,flash
 import pyodbc  
 import re  
 
@@ -7,13 +7,13 @@ app = Flask(__name__)
 # 填写你的数据库连接详情  
 server = 'sql-server-for-web.database.windows.net'  
 database = 'sql-server-for-web'  
-username = 'sihaol'  
-password = 'Qwerwsx1234!'  
+sql_username = 'sihaol'  
+sql_password = 'Qwerwsx1234!'  
 driver = '{ODBC Driver 18 for SQL Server}'  
   
 # 连接数据库  
 def get_db_connection():  
-    conn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + username + ';PWD=' + password)  
+    conn = pyodbc.connect('DRIVER=' + driver + ';SERVER=' + server + ';PORT=1433;DATABASE=' + database + ';UID=' + sql_username + ';PWD=' + sql_password)  
     return conn  
   
 
@@ -44,7 +44,16 @@ def validate_credentials(username, password):
         return False, "用户名必须包含至少一个字母和一个数字"  
     if not re.match(password_pattern, password):  
         return False, "密码必须包含至少一个字母和一个数字"  
-  
+    #检查是否用户新注册的用户名在数据库中已经存在
+    #连接database
+    conn = get_db_connection()                                   
+    conn.setencoding('utf-8')
+    conn.setdecoding(pyodbc.SQL_WCHAR,encoding="UTF-8")
+    cursor = conn.cursor()
+    cursor.execute("select * from dbo.Users")
+    usernames_register = [row.Username for row in cursor]
+    if username in usernames_register:
+        return False, "用户名不唯一"
     return True, "用户名和密码验证成功"  
 
   
@@ -52,14 +61,14 @@ def validate_credentials(username, password):
 def index():  
     return render_template('test.html')  
   
-@app.route('/register', methods=['POST', 'Get'])  
+@app.route('/register', methods=['POST', 'GET'])  
 def register():
     #如果是跳转请求，渲染signup页面
-    if request.method == 'Get':
-        render_template('Signup.html')
-    elif request.method == "Post":   
-        username = request.form.get['username']  
-        password = request.form.get['password']
+    if request.method == 'GET':
+        return render_template('Signup.html')
+    elif request.method == "POST":   
+        username = request.form['username']  
+        password = request.form['password']
 
     # 简单的验证  
         validation, message = validate_credentials(username, password)
