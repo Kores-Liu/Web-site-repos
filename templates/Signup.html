@@ -3,16 +3,18 @@
 <head>  
     <meta charset="UTF-8">  
     <title>Registration</title>
-    <link rel="stylesheet" href="../static/mystyle.css">   
+    
+    <script src="../static/bck.js"></script>   
 </head>  
 <body>  
     <div class="content">
     <h2>Register Your New Acount</h2>
-    <form method="POST" action="/register">  
-        Username: <input type="text" name="username"><br>  
-        Password: <input type="password" name="password"><br>  
+    <form method="POST" action="/register" onsubmit="return checkInput()">  
+        Username: <input type="text" name="username" id="username"><br>  
+        Password: <input type="password" name="password" id="password"><br>  
         <input type="submit" value="Register">
     </form>  
     </div>
+    <link rel="stylesheet" href="../static/mystyle.css">
 </body>  
 </html>  

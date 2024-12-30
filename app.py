@@ -77,7 +77,7 @@ def register():
       
         # 插入到数据库  
         insert_user(username, password)  
-        return redirect(url_for('/'))  
+        return redirect(url_for('index'))  
 
 @app.route('/login')
 def login():
