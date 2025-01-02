@@ -1,5 +1,5 @@
 import pyodbc  
-import register  
+import app  
 
 server = 'sql-server-for-web.database.windows.net'  
 database = 'sql-server-for-web'  

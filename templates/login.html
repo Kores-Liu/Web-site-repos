@@ -11,8 +11,11 @@
     <form method="POST" action="/login">  
         Username: <input type="text" name="username"><br>  
         Password: <input type="password" name="password"><br>
-        No account? <a href="{{ url_for('register') }}">Sign Up</a>   
+        No account? <a href="{{ url_for('register') }}">Sign Up</a><br>
         <input type="submit" value="Login"> 
+        {% if not validation %}
+        Login failed!
+        {% endif %}
     </form>  
     </div>
 </body>  
