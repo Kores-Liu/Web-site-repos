@@ -12,6 +12,15 @@ body {
     padding: 20px;
 }
 
+h1 {
+    text-align: center;
+    font-family: 'Roboto', 'Arial', sans-serif; 
+    font-size: 48px;
+    font-weight: bold; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    margin-top: 20px; 
+}
+
 .message-board {
     display: flex;
     flex-direction: column;
@@ -80,3 +89,21 @@ body {
     background-color: #ccc;
     cursor: not-allowed;
 }
+
+.submit-btn {  
+    background-color: #007aff; /* 深蓝色 */  
+    color: #ffffff;  
+    border: none;  
+    padding: 9px 10px;  
+    font-size: 16px;  
+    border-radius: 8px;  
+    cursor: pointer;  
+    transition: background-color 0.3s;  
+    position: absolute;  
+    margin-top: 5%;  
+    margin-left: 38%;  
+  }  
+  
+  .submit-btn:hover {  
+    background-color: #0056b3; /* 鼠标悬停时的颜色变深 */  
+  }  

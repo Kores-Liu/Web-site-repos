@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 import checkusername
+import messageboard
 
 
 app = Flask(__name__)  
@@ -47,11 +48,17 @@ def login():
 def Logout():
     session.clear()
     return redirect(url_for('index'))
+
+@app.route('/messageboard', methods=['POST', 'GET'])
+def messages():
+    if request.method == 'GET':
+        messagelist = messageboard.get_content()
+        return render_template('messageboard.html', messagelist=messagelist)
     
 #渲染没有完成的功能, 404 NOT Found
 @app.route('/commingsoon')
 def commingsoon():
-    return render_template('commingsoon.html'), 404    
+    return render_template('commingsoon.htm11l'), 404    
  
 if __name__ == '__main__':  
     app.run(debug=True)  
