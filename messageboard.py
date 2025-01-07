@@ -6,11 +6,11 @@ def get_content():
     cursor.execute("select * from dbo.messages")
     return cursor.fetchall()
 
-def insert_content(username, message):
+def insert_content(username, message, title):
     try:
         conn = connectsql.sqlconnection(database='messageboard')
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO dbo.Users (username, password) VALUES (?, ?)", (username, message))
+        cursor.execute("INSERT INTO dbo.messages (username, content, title) VALUES (?, ?, ?)", (username, message, title))
         conn.commit()  # 提交事务以确保数据被插入到数据库
     except Exception as e:
         print(f"An error occurred: {e}")

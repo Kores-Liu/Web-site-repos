@@ -55,10 +55,23 @@ def messages():
         messagelist = messageboard.get_content()
         return render_template('messageboard.html', messagelist=messagelist)
     
+
+@app.route('/leavemessage', methods=['POST', 'GET'])
+def leavemessage():
+    if request.method == 'GET':
+        return render_template('Leavemessage.html')
+    elif request.method == 'POST':
+        if 'username' in session:
+            messageboard.insert_content(session['username'], request.form['content'], request.form['title'])
+            return redirect(url_for('messages'))
+        else:
+            return redirect(url_for('login'))
+
+    
 #渲染没有完成的功能, 404 NOT Found
 @app.route('/commingsoon')
 def commingsoon():
-    return render_template('commingsoon.htm11l'), 404    
+    return render_template('commingsoon.html'), 404    
  
 if __name__ == '__main__':  
     app.run(debug=True)  

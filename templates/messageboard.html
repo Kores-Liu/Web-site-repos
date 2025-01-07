@@ -9,16 +9,20 @@
 <body>
     <div class="container">
         <h1>Message Board</h1>
-        <button class="submit-btn">>Message</button>  
+        <button class="submit-btn" onclick="redirect()">Message</button>  
         <div class="message-board" id="messageBoard">
             {%if messagelist%}
                 {%for row in messagelist%}
                     <div class="message">
-                        {{row[2]}}
+                        <div class="message-title">
+                        {{row[4]}}
+                        </div><br>
+                        {{row[1]}}
+                        {{row[3]}}
                     </div>
                 {%endfor%}
             {% else %}
-                <div class="message">
+                <div>
                     No one leaves messages...
                 </div>
             {% endif %}
@@ -28,4 +32,10 @@
         </div>
     </div>   
 </body>
+<script>
+    function redirect() {
+        // 跳转到另一个网页
+        window.location.href = "/leavemessage";
+    }
+    </script>
 </html>
